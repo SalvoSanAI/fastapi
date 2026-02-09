@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Response, status, HTTPException, Depends
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings
@@ -10,7 +11,7 @@ from .roturs import post, user, auth
 from .config import settings
 
 app = FastAPI(version="1.0.0.0", title="Posts API with ORM", description="A simple Posts API using SQLAlchemy ORM")
-
+app.middleware("CORS")(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 
 # Configure logging
